@@ -1,152 +1,168 @@
 [
   {
-    "title": "",
-    "slug": "",
-    "cover": "",
-    "genre": "",
-    "episodes": 0,
-    "summary": "",
-    "date": "2026-04-13",
-    "featured": false
+    "id": 1,
+    "title": "Ishq Par Jor Nahi",
+    "slug": "ishq-par-jor-nahi",
+    "cover": "https://i.ibb.co/RpV5MWv2/file-0000000071087207b8fdc85d969f22b3.png",
+    "summary": "माँ के गुज़र जाने के बाद गौरी के चाचा ने उसे मुंबई रवाना कर दिया, जहाँ उसे उसके पिता के पुराने मित्र रमाकांत के घर पर आसरा मिला। भोली-भाली गौरी मुंबई जैसे महानगर में रह कर अपना डिज़ाइनर बनने का सपना पूरा करना चाहती थी पर क्या होगा जब उसकी ज़िन्दगी में होगी इश्क़ की दस्तक? किसी ने सच ही कहा है किसी का भी \"इश्क़ पर जोर नहीं\" चलता।",
+    "genre": "Romance, Drama",
+    "episodes": 320,
+    "featured": true,
+    "date": "2026-04-13"
   },
   {
-    "title": "",
-    "slug": "",
+    "id": 2,
+    "title": "Bepanah Ishq",
+    "slug": "bepanah-ishq",
+    "cover": "https://i.ibb.co/Q7HN7z02/file-00000000068071fa864f9ef6edef8793.png",
+    "summary": "अस्मिता घोष, जिसे उसके परिवार ने ही बेच दिया है पैसों के लिए। वह जा टकराई है शिवराज शेखर से जो है एक गैंगस्टर! शिवराज उसे अपने घर में काम करने का ऑफर देता है, लेकिन क्या वो दोनों एक छत के नीचे रह पायेंगे? या किस्मत ने लिख रखी है कोई और कहानी? जानने के लिए पढें - बेपनाह इश्क!",
+    "genre": "Romance, Drama",
+    "episodes": 120,
+    "featured": true,
+    "date": "2026-04-13"
+  },
+
+  {
+    "id": 3,
+    "title": "Sample Comic 3",
+    "slug": "sample-comic-3",
     "cover": "",
+    "summary": "",
     "genre": "",
     "episodes": 0,
-    "summary": "",
-    "date": "2026-04-13",
-    "featured": false
+    "featured": false,
+    "date": "2026-04-13"
   },
   {
-    "title": "",
-    "slug": "",
+    "id": 4,
+    "title": "Sample Comic 4",
+    "slug": "sample-comic-4",
     "cover": "",
+    "summary": "",
     "genre": "",
     "episodes": 0,
-    "summary": "",
-    "date": "2026-04-13",
-    "featured": false
+    "featured": false,
+    "date": "2026-04-13"
   },
   {
-    "title": "",
-    "slug": "",
+    "id": 5,
+    "title": "Sample Comic 5",
+    "slug": "sample-comic-5",
     "cover": "",
+    "summary": "",
     "genre": "",
     "episodes": 0,
-    "summary": "",
-    "date": "2026-04-13",
-    "featured": false
+    "featured": false,
+    "date": "2026-04-13"
   },
   {
-    "title": "",
-    "slug": "",
+    "id": 6,
+    "title": "Sample Comic 6",
+    "slug": "sample-comic-6",
     "cover": "",
+    "summary": "",
     "genre": "",
     "episodes": 0,
-    "summary": "",
-    "date": "2026-04-13",
-    "featured": false
+    "featured": false,
+    "date": "2026-04-13"
   },
   {
-    "title": "",
-    "slug": "",
+    "id": 7,
+    "title": "Sample Comic 7",
+    "slug": "sample-comic-7",
     "cover": "",
+    "summary": "",
     "genre": "",
     "episodes": 0,
-    "summary": "",
-    "date": "2026-04-13",
-    "featured": false
+    "featured": false,
+    "date": "2026-04-13"
   },
   {
-    "title": "",
-    "slug": "",
+    "id": 8,
+    "title": "Sample Comic 8",
+    "slug": "sample-comic-8",
     "cover": "",
+    "summary": "",
     "genre": "",
     "episodes": 0,
-    "summary": "",
-    "date": "2026-04-13",
-    "featured": false
+    "featured": false,
+    "date": "2026-04-13"
   },
   {
-    "title": "",
-    "slug": "",
+    "id": 9,
+    "title": "Sample Comic 9",
+    "slug": "sample-comic-9",
     "cover": "",
+    "summary": "",
     "genre": "",
     "episodes": 0,
-    "summary": "",
-    "date": "2026-04-13",
-    "featured": false
+    "featured": false,
+    "date": "2026-04-13"
   },
   {
-    "title": "",
-    "slug": "",
+    "id": 10,
+    "title": "Sample Comic 10",
+    "slug": "sample-comic-10",
     "cover": "",
+    "summary": "",
     "genre": "",
     "episodes": 0,
-    "summary": "",
-    "date": "2026-04-13",
-    "featured": false
+    "featured": false,
+    "date": "2026-04-13"
   },
   {
-    "title": "",
-    "slug": "",
+    "id": 11,
+    "title": "Sample Comic 11",
+    "slug": "sample-comic-11",
     "cover": "",
+    "summary": "",
     "genre": "",
     "episodes": 0,
-    "summary": "",
-    "date": "2026-04-13",
-    "featured": false
+    "featured": false,
+    "date": "2026-04-13"
   },
   {
-    "title": "",
-    "slug": "",
+    "id": 12,
+    "title": "Sample Comic 12",
+    "slug": "sample-comic-12",
     "cover": "",
+    "summary": "",
     "genre": "",
     "episodes": 0,
-    "summary": "",
-    "date": "2026-04-13",
-    "featured": false
+    "featured": false,
+    "date": "2026-04-13"
   },
   {
-    "title": "",
-    "slug": "",
+    "id": 13,
+    "title": "Sample Comic 13",
+    "slug": "sample-comic-13",
     "cover": "",
+    "summary": "",
     "genre": "",
     "episodes": 0,
-    "summary": "",
-    "date": "2026-04-13",
-    "featured": false
+    "featured": false,
+    "date": "2026-04-13"
   },
   {
-    "title": "",
-    "slug": "",
+    "id": 14,
+    "title": "Sample Comic 14",
+    "slug": "sample-comic-14",
     "cover": "",
+    "summary": "",
     "genre": "",
     "episodes": 0,
-    "summary": "",
-    "date": "2026-04-13",
-    "featured": false
+    "featured": false,
+    "date": "2026-04-13"
   },
   {
-    "title": "",
-    "slug": "",
+    "id": 15,
+    "title": "Sample Comic 15",
+    "slug": "sample-comic-15",
     "cover": "",
+    "summary": "",
     "genre": "",
     "episodes": 0,
-    "summary": "",
-    "date": "2026-04-13",
-    "featured": false
-  },
-  {
-    "title": "",
-    "slug": "",
-    "cover": "",
-    "genre": "",
-    "episodes": 0,
-    "summary": "",
-    "date": "2026-04-13",
-    "featured": false
+    "featured": false,
+    "date": "2026-04-13"
   }
-]
+    ]
