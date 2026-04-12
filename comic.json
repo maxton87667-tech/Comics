@@ -22,6 +22,26 @@
     },
 
     {
+      "slug": "pyaar-ka-intezar",
+      "title": "Pyaar Ka Intezar",
+      "cover": "https://i.ibb.co/FkjT6brt/file-000000008f98720bb90daea18f2149bd.png",
+
+      "slider": {
+        "enabled": false,
+        "image": ""
+      },
+
+      "episodes": 35,
+      "genre": ["College","Drama","Romance"],
+      "category": "Manhwa",
+      "badge": "PG-13",
+
+      "date": "2026-04-12",
+
+      "page": "pages/pyaar-ka-intezar.html"
+    },
+    
+    {
       "slug": "mera-lucky-saiyaan",
       "title": "Mera Lucky Saiyaan",
       "cover": "https://i.ibb.co/wNSmfJJh/file-000000000c3c722f98bd920154a53b9e.png",
@@ -221,6 +241,26 @@
       "page": "pages/iit-diaries.html"
     },
 
+    {
+      "slug": "mahua-devi",
+      "title": "MAHUA DEVI",
+      "cover": "https://ibb.co/d4sZmF3S"><img src="https://i.ibb.co/F4kpH2f9/file-0000000041f071fa908a50dcadec8944.png",
+
+      "slider": {
+        "enabled": false,
+        "image": ""
+      },
+
+      "episodes": 50,
+      "genre": ["Horror","Drama","Romance"],
+      "category": "Manhwa",
+      "badge": "AD-18",
+
+      "date": "2026-04-12",
+
+      "page": "pages/mahua-devi.html"
+    },
+    
     {
       "slug": "brahmarakshas",
       "title": "Brahmarakshas",
