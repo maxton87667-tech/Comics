@@ -1,234 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Comic PUR</title>
+<title>Comic Pur</title>
 
 <style>
-body{
-  margin:0;
-  font-family:sans-serif;
-  background:#0a001f;
-  color:white;
+:root {
+  --primary: #00d4ff;
+  --accent: #ff69b4;
+  --dark: #0a001f;
+  --glow: rgba(0, 212, 255, 0.7);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: linear-gradient(135deg, var(--dark), #1a003f);
+  color: white;
+  font-family: 'Segoe UI', system-ui, sans-serif;
 }
 
 /* HEADER */
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:10px 14px;
-  background:#111;
-  position:sticky;
-  top:0;
-  z-index:100;
+header {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10, 0, 31, 0.92);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.35);
+  height: 64px;
 }
 
-.logo img{
-  width:55px;
-  height:55px;
-  border-radius:50%;
+.logo img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 3px solid var(--primary);
+  box-shadow: 0 0 20px var(--glow);
 }
 
-.heading img{
-  height:90px;
+.heading-img {
+  max-width: 220px;
 }
 
-.search img{
-  width:40px;
-  cursor:pointer;
-}
-
-/* SLIDER */
-.slider{
-  overflow:hidden;
-  width:100%;
-}
-
-.slides{
-  display:flex;
-  transition:0.5s ease;
-}
-
-.card{
-  min-width:100%;
-  position:relative;
-}
-
-.card img{
-  width:100%;
-  height:450px;
-  object-fit:cover;
-}
-
-.overlay{
-  position:absolute;
-  bottom:0;
-  width:100%;
-  padding:15px;
-  background:linear-gradient(transparent,rgba(0,0,0,0.9));
-}
-
-.overlay h2{
-  margin:0;
-  font-size:20px;
-}
-
-.overlay p{
-  margin:3px 0;
-  font-size:13px;
-  opacity:0.85;
+.search-icon {
+  width: 60px;
+  cursor: pointer;
+  filter: drop-shadow(0 0 15px var(--glow));
 }
 
 /* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  padding:10px;
+.container {
+  padding: 15px;
 }
 
-.grid-item{
-  position:relative;
-  cursor:pointer;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
 }
 
-.grid-item img{
-  width:100%;
-  height:220px;
-  object-fit:cover;
-  border-radius:12px;
+/* CARD */
+.card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.grid-overlay{
-  position:absolute;
-  bottom:0;
-  width:100%;
-  padding:8px;
-  background:linear-gradient(transparent,rgba(0,0,0,0.85));
-  font-size:12px;
+.card:hover {
+  transform: scale(1.05);
 }
 
-/* LOAD BUTTON */
-#loadMoreBtn{
-  padding:12px 20px;
-  border:none;
-  border-radius:10px;
-  background:linear-gradient(45deg,#00d4ff,#ff4fd8);
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
+.card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+
+/* OVERLAY */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+}
+
+.title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.meta {
+  font-size: 11px;
+  color: #ccc;
+}
+
+/* BUTTON */
+.load-btn {
+  display: block;
+  margin: 25px auto;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(45deg, var(--primary), var(--accent));
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 15px var(--glow);
+}
+
+.load-btn:hover {
+  transform: translateY(-3px);
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>
   <div class="logo">
-    <img src="assets/logo.png">
+    <img src="assets/heading.png">
   </div>
 
-  <div class="heading">
-    <img src="assets/logo-circle.png">
-  </div>
+  <img src="assets/logo-circle.png" class="heading-img">
 
-  <div class="search" onclick="location.href='search.html'">
-    <img src="assets/search.png">
-  </div>
+  <img src="assets/search-icon.png" class="search-icon"
+       onclick="window.location.href='search.html'">
 </header>
 
-<!-- SLIDER -->
-<div class="slider">
-  <div class="slides" id="slides"></div>
-</div>
-
-<!-- GRID -->
-<div class="grid" id="grid"></div>
-
-<div style="text-align:center;padding:20px;">
-  <button id="loadMoreBtn" onclick="loadMore()">Load More</button>
+<div class="container">
+  <div class="grid" id="comicList"></div>
+  <button id="loadMore" class="load-btn">Load More</button>
 </div>
 
 <script>
+let comics = [];
+let visible = 8;
 
-let comics=[];
-let sliderIndex=0;
-let gridIndex=0;
-const limit=8;
-
-/* LOAD DATA */
 fetch("comics.json")
-.then(r=>r.json())
-.then(data=>{
-  comics=data;
+.then(res => res.json())
+.then(data => {
 
-  comics.sort((a,b)=>new Date(b.date)-new Date(a.date));
+  comics = data.comics
+    .filter(c => c.show)
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  loadSlider();
-  loadMore();
-  autoSlide();
+  render();
 });
 
-/* SLIDER */
-function loadSlider(){
-  const slides=document.getElementById("slides");
+function render() {
+  const list = document.getElementById("comicList");
+  list.innerHTML = "";
 
-  comics.filter(c=>c.featured).forEach(c=>{
-    slides.innerHTML+=`
-      <div class="card">
+  comics.slice(0, visible).forEach(c => {
+    list.innerHTML += `
+      <div class="card" onclick="openComic('${c.link}')">
         <img src="${c.cover}">
         <div class="overlay">
-          <h2>${c.title}</h2>
-          <p>${c.genre} • ${c.episodes} EP</p>
-          <p>${c.summary.slice(0,80)}...</p>
+          <div class="title">${c.title}</div>
+          <div class="meta">Episodes: ${c.episodes}</div>
+          <div class="meta">${c.genre}</div>
         </div>
       </div>
     `;
   });
-}
 
-/* AUTO SLIDE */
-function autoSlide(){
-  const slides=document.getElementById("slides");
-
-  setInterval(()=>{
-    sliderIndex++;
-    let total=document.querySelectorAll(".card").length;
-    if(sliderIndex>=total) sliderIndex=0;
-    slides.style.transform=`translateX(-${sliderIndex*100}%)`;
-  },3000);
-}
-
-/* LOAD MORE GRID */
-function loadMore(){
-  const grid=document.getElementById("grid");
-
-  let next=comics.slice(gridIndex,gridIndex+limit);
-
-  next.forEach(c=>{
-    grid.innerHTML+=`
-      <div class="grid-item" onclick="openComic('${c.slug}')">
-        <img src="${c.cover}">
-        <div class="grid-overlay">${c.title}</div>
-      </div>
-    `;
-  });
-
-  gridIndex+=limit;
-
-  if(gridIndex>=comics.length){
-    document.getElementById("loadMoreBtn").style.display="none";
+  if (visible >= comics.length) {
+    document.getElementById("loadMore").style.display = "none";
   }
 }
 
-/* OPEN COMIC */
-function openComic(slug){
-  location.href=`comic.html?comic=${slug}`;
+function openComic(link) {
+  window.location.href = link;
 }
 
+document.getElementById("loadMore").addEventListener("click", () => {
+  visible += 8;
+  render();
+});
 </script>
 
 </body>
