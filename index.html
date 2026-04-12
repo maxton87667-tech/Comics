@@ -13,11 +13,9 @@
       color:white;
     }
 
-    /* NAVBAR */
     .navbar{
       display:flex;
       justify-content:space-between;
-      align-items:center;
       padding:15px 20px;
       background:#111;
       position:sticky;
@@ -25,56 +23,34 @@
     }
 
     .logo{
+      color:#00ff66;
       font-size:22px;
       font-weight:bold;
-      color:#00ff66;
     }
 
-    .nav-links a{
-      margin-left:15px;
-      color:white;
-      text-decoration:none;
-      font-size:14px;
-    }
-
-    /* HERO */
     .hero{
-      padding:60px 20px;
       text-align:center;
+      padding:50px 20px;
       background:linear-gradient(135deg,#111,#1a1a1a);
     }
 
-    .hero h1{
-      font-size:38px;
-      margin-bottom:10px;
-    }
-
-    .hero p{
-      opacity:0.8;
-      margin-bottom:20px;
-    }
-
     .btn{
-      padding:12px 25px;
+      padding:10px 20px;
       background:#00ff66;
-      color:black;
       border:none;
       border-radius:10px;
-      font-weight:bold;
       cursor:pointer;
+      font-weight:bold;
     }
 
-    /* SECTION */
     .section{
       padding:20px;
     }
 
     .section h2{
       color:#00ff66;
-      margin-bottom:15px;
     }
 
-    /* GRID */
     .grid{
       display:grid;
       grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
@@ -85,8 +61,8 @@
       background:#1a1a1a;
       border-radius:16px;
       overflow:hidden;
-      transition:0.3s;
       cursor:pointer;
+      transition:0.3s;
     }
 
     .card:hover{
@@ -102,40 +78,24 @@
     .info{
       padding:10px;
     }
-
-    .info b{
-      display:block;
-      margin-bottom:5px;
-    }
-
-    /* FOOTER */
-    .footer{
-      text-align:center;
-      padding:20px;
-      font-size:12px;
-      opacity:0.6;
-      margin-top:30px;
-    }
-
   </style>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
+  <!-- NAV -->
   <div class="navbar">
-    <div class="logo"> Comic Pur</div>
-
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="comics.html">Comics</a>
+    <div class="logo">📚 Comic Pur</div>
+    <div>
+      <a href="index.html" style="color:white;margin-right:10px;">Home</a>
+      <a href="comics.html" style="color:white;">Comics</a>
     </div>
   </div>
 
   <!-- HERO -->
   <div class="hero">
     <h1>Welcome to Comic Pur</h1>
-    <p>Read Action • Horror • Fantasy • Web Comics Online</p>
+    <p>Read Comics Online</p>
     <button class="btn" onclick="location.href='comics.html'">
       Start Reading
     </button>
@@ -144,55 +104,17 @@
   <!-- TRENDING -->
   <div class="section">
     <h2>🔥 Trending Comics</h2>
-
-    <div class="grid">
-
-      <div class="card" onclick="openComic('shadow-fighter')">
-        <img src="assets/images/sample1.jpg">
-        <div class="info">
-          <b>Shadow Fighter</b>
-          Action | 300 CH
-        </div>
-      </div>
-
-      <div class="card" onclick="openComic('dark-hero')">
-        <img src="assets/images/sample2.jpg">
-        <div class="info">
-          <b>Dark Hero</b>
-          Horror | 120 CH
-        </div>
-      </div>
-
-    </div>
+    <div class="grid" id="trendingGrid"></div>
   </div>
 
   <!-- FEATURED -->
   <div class="section">
     <h2>⭐ Featured Comics</h2>
-
-    <div class="grid">
-
-      <div class="card" onclick="openComic('blade-king')">
-        <img src="assets/images/sample3.jpg">
-        <div class="info">
-          <b>Blade King</b>
-          Fantasy | 200 CH
-        </div>
-      </div>
-
-    </div>
+    <div class="grid" id="featuredGrid"></div>
   </div>
 
-  <!-- FOOTER -->
-  <div class="footer">
-    © 2026 Comic Pur • All Rights Reserved
-  </div>
-
-  <script>
-    function openComic(folder){
-      window.location.href = "reader.html?comic=" + folder;
-    }
-  </script>
+  <!-- JS CONNECT -->
+  <script src="js/main.js"></script>
 
 </body>
 </html>
