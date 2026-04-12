@@ -5,63 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Comic PUR</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
 <style>
 
+*{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-margin:0;
-background:#0f001f;
-color:#e0e0ff;
-font-family:'Segoe UI',system-ui;
+background:linear-gradient(180deg,#070018,#12003a);
+color:white;
+font-family:'Poppins',sans-serif;
 }
 
 /* HEADER */
 
 header{
-height:52px;
+height:60px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:0 14px;
-background:#0a001f;
+padding:0 16px;
+background:rgba(10,0,31,0.9);
+backdrop-filter:blur(10px);
 }
 
 header img{
-height:42px;
-}
-
-/* FILTER */
-
-.filter{
-display:flex;
-justify-content:center;
-margin:10px;
-}
-
-.toggle{
-background:#1a003f;
-border-radius:20px;
-display:flex;
-overflow:hidden;
-}
-
-.toggle div{
-padding:8px 14px;
-font-size:12px;
-cursor:pointer;
-}
-
-.toggle .active{
-background:#00d4ff;
-color:black;
+height:44px;
 }
 
 /* SLIDER */
 
 .slider{
+margin:14px;
 overflow:hidden;
+border-radius:20px;
 position:relative;
-margin:10px;
-border-radius:16px;
 }
 
 .slider-track{
@@ -76,44 +54,83 @@ position:relative;
 
 .slide img{
 width:100%;
-height:220px;
+height:240px;
 object-fit:cover;
+}
+
+.slide-overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(90deg,rgba(0,0,0,0.85),transparent);
 }
 
 .slide-text{
 position:absolute;
-left:16px;
+left:20px;
 top:50%;
 transform:translateY(-50%);
 max-width:60%;
 }
 
 .slide-title{
-font-size:28px;
-font-weight:900;
+font-size:30px;
+font-weight:800;
 }
 
 .slide-info{
 font-size:13px;
 margin-top:6px;
+opacity:.85;
 }
 
 /* BADGE */
 
 .badge{
 position:absolute;
-top:0;
-right:0;
+top:10px;
+right:10px;
 padding:4px 8px;
 font-size:11px;
-font-weight:bold;
-border-bottom-left-radius:10px;
+font-weight:600;
+border-radius:6px;
 }
 
 .pg{background:#00c853;}
 .ad{background:#ff1744;}
 
+/* DOTS */
+
+.dots{
+position:absolute;
+bottom:10px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:6px;
+}
+
+.dot{
+width:8px;
+height:8px;
+background:#888;
+border-radius:50%;
+}
+
+.dot.active{
+background:#00d4ff;
+}
+
 /* GRID */
+
+.section{
+padding:0 14px;
+font-size:14px;
+margin-top:6px;
+opacity:.8;
+}
 
 .grid{
 display:grid;
@@ -123,29 +140,37 @@ padding:14px;
 }
 
 .card{
-position:relative;
-border-radius:14px;
+border-radius:16px;
 overflow:hidden;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(8px);
+transition:0.3s;
+position:relative;
+}
+
+.card:hover{
+transform:scale(1.03);
 }
 
 .card img{
 width:100%;
-height:100%;
+aspect-ratio:2/3;
 object-fit:cover;
 }
 
-.overlay{
-position:absolute;
-bottom:0;
-padding:8px;
-background:linear-gradient(transparent,black);
-width:100%;
-font-size:13px;
+.card-info{
+padding:10px;
 }
 
-.ep{
-font-size:11px;
-opacity:.8;
+.card-title{
+font-size:14px;
+font-weight:600;
+}
+
+.card-ep{
+font-size:12px;
+opacity:.7;
+margin-top:2px;
 }
 
 a{
@@ -164,146 +189,86 @@ color:white;
 <img src="assets/search-icon.png" onclick="location.href='search.html'">
 </header>
 
-<!-- FILTER -->
-<div class="filter">
-<div class="toggle">
-<div onclick="setMode(event,'pg')">PG</div>
-<div class="active" onclick="setMode(event,'all')">ALL</div>
-<div onclick="setMode(event,'adult')">18+</div>
-</div>
-</div>
-
 <!-- SLIDER -->
 <div class="slider">
 <div class="slider-track" id="slider"></div>
+<div class="dots" id="dots"></div>
 </div>
 
 <!-- GRID -->
+<div class="section">Latest Comics</div>
 <div class="grid" id="grid"></div>
 
 <script>
 
-let mode="all";
-let comicsData=[];
-let episodesData=[];
-
-/* FILTER FIX */
-
-function setMode(e,m){
-mode=m;
-document.querySelectorAll(".toggle div").forEach(el=>el.classList.remove("active"));
-e.target.classList.add("active");
-render();
-}
-
-/* LOAD JSON */
+let comics=[], details=[], sliderData=[];
 
 Promise.all([
 fetch("data/comics.json").then(r=>r.json()),
-fetch("data/episodes.json").then(r=>r.json())
+fetch("data/details.json").then(r=>r.json()),
+fetch("data/slider.json").then(r=>r.json())
 ])
-.then(([c,e])=>{
-comicsData=c.comics;
-episodesData=e.episodes;
+.then(([c,d,s])=>{
+comics=c.comics;
+details=d.details;
+sliderData=s.slider;
 render();
 });
 
-/* MAIN RENDER */
-
 function render(){
-
-let list=[...comicsData];
-
-/* FILTER */
-
-if(mode==="pg"){
-list=list.filter(c=>c.badge==="PG-13");
-}
-if(mode==="adult"){
-list=list.filter(c=>c.badge==="AD-18");
-}
 
 /* SLIDER */
 
 const slider=document.getElementById("slider");
+const dots=document.getElementById("dots");
+
 slider.innerHTML="";
-let slideIndex=0;
+dots.innerHTML="";
 
-list.forEach(c=>{
+let activeSlides = sliderData
+.filter(s=>s.active)
+.sort((a,b)=>a.order-b.order);
 
-if(c.slider && c.slider.enabled){
+activeSlides.forEach((s,i)=>{
 
-let ep = episodesData.find(e=>e.slug===c.slug);
+let comic = comics.find(c=>c.slug===s.slug);
+let det = details.find(d=>d.slug===s.slug);
+
+if(!comic) return;
 
 slider.innerHTML+=`
+<a href="comic.html?comic=${comic.slug}">
 <div class="slide">
 
-<span class="badge ${c.badge==="AD-18"?"ad":"pg"}">
-${c.badge}
+<span class="badge ${comic.badge==="AD-18"?"ad":"pg"}">
+${comic.badge}
 </span>
 
-<img src="${c.slider.image}">
+<img src="${s.image}">
+
+<div class="slide-overlay"></div>
 
 <div class="slide-text">
-<div class="slide-title">${c.title}</div>
+<div class="slide-title">${comic.title}</div>
 <div class="slide-info">
-${ep ? ep.total+" Episodes" : ""}
+${det ? det.total+" Episodes" : ""}
 </div>
 </div>
 
 </div>
-`;
-
-}
-
-});
-
-/* GRID */
-
-const grid=document.getElementById("grid");
-grid.innerHTML="";
-
-list.forEach(c=>{
-
-let ep = episodesData.find(e=>e.slug===c.slug);
-
-grid.innerHTML+=`
-<a href="comic.html?comic=${c.slug}">
-
-<div class="card">
-
-<span class="badge ${c.badge==="AD-18"?"ad":"pg"}">
-${c.badge}
-</span>
-
-<img src="${c.cover}">
-
-<div class="overlay">
-${c.title}<br>
-<span class="ep">
-${ep ? ep.total+" Episodes" : ""}
-</span>
-</div>
-
-</div>
-
 </a>
 `;
 
+dots.innerHTML+=`<div class="dot ${i==0?"active":""}"></div>`;
+
 });
 
-initSlider();
-}
+/* SWIPE */
 
-/* TOUCH SLIDER FIXED */
-
-function initSlider(){
-
-let track=document.getElementById("slider");
 let index=0;
 let startX=0;
-
-track.style.transform="translateX(0)";
+let track=document.getElementById("slider");
+let dot=document.querySelectorAll(".dot");
 
 track.addEventListener("touchstart",e=>{
 startX=e.touches[0].clientX;
@@ -315,12 +280,58 @@ let endX=e.changedTouches[0].clientX;
 if(startX-endX>50) index++;
 if(endX-startX>50) index--;
 
-let slides=document.querySelectorAll(".slide");
-
 if(index<0) index=0;
-if(index>=slides.length) index=slides.length-1;
+if(index>=activeSlides.length) index=activeSlides.length-1;
 
 track.style.transform=`translateX(-${index*100}%)`;
+
+dot.forEach(d=>d.classList.remove("active"));
+if(dot[index]) dot[index].classList.add("active");
+});
+
+/* AUTO SLIDE */
+
+setInterval(()=>{
+index++;
+if(index>=activeSlides.length) index=0;
+
+track.style.transform=`translateX(-${index*100}%)`;
+
+dot.forEach(d=>d.classList.remove("active"));
+if(dot[index]) dot[index].classList.add("active");
+
+},4000);
+
+/* GRID */
+
+const grid=document.getElementById("grid");
+grid.innerHTML="";
+
+comics.forEach(c=>{
+
+let det = details.find(d=>d.slug===c.slug);
+
+grid.innerHTML+=`
+<a href="comic.html?comic=${c.slug}">
+<div class="card">
+
+<span class="badge ${c.badge==="AD-18"?"ad":"pg"}">
+${c.badge}
+</span>
+
+<img src="${c.cover}">
+
+<div class="card-info">
+<div class="card-title">${c.title}</div>
+<div class="card-ep">
+${det ? det.total+" Episodes" : ""}
+</div>
+</div>
+
+</div>
+</a>
+`;
+
 });
 
 }
