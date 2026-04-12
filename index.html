@@ -1,120 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Comic Pur</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Comic PUR</title>
 
-  <style>
-    body{
-      margin:0;
-      font-family:Arial;
-      background:#0f0f0f;
-      color:white;
-    }
+<style>
+:root{
+  --primary:#00d4ff;
+  --accent:#ff69b4;
+  --dark:#0a001f;
+}
 
-    .navbar{
-      display:flex;
-      justify-content:space-between;
-      padding:15px 20px;
-      background:#111;
-      position:sticky;
-      top:0;
-    }
+*{margin:0;padding:0;box-sizing:border-box;}
 
-    .logo{
-      color:#00ff66;
-      font-size:22px;
-      font-weight:bold;
-    }
+body{
+  background:linear-gradient(135deg,var(--dark),#1a003f);
+  color:white;
+  font-family:'Segoe UI',sans-serif;
+}
 
-    .hero{
-      text-align:center;
-      padding:50px 20px;
-      background:linear-gradient(135deg,#111,#1a1a1a);
-    }
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 16px;
+  background:rgba(10,0,31,0.9);
+  position:sticky;
+  top:0;
+}
 
-    .btn{
-      padding:10px 20px;
-      background:#00ff66;
-      border:none;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:bold;
-    }
+header img{
+  height:45px;
+}
 
-    .section{
-      padding:20px;
-    }
+/* HERO */
+.hero{
+  text-align:center;
+  padding:40px 20px;
+}
 
-    .section h2{
-      color:#00ff66;
-    }
+.hero h1{
+  font-size:28px;
+  color:var(--primary);
+}
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-      gap:15px;
-    }
+.hero p{
+  opacity:0.7;
+  margin-top:8px;
+}
 
-    .card{
-      background:#1a1a1a;
-      border-radius:16px;
-      overflow:hidden;
-      cursor:pointer;
-      transition:0.3s;
-    }
+/* SEARCH BAR */
+.search-bar{
+  width:90%;
+  margin:20px auto;
+  display:block;
+  padding:12px;
+  border-radius:25px;
+  border:2px solid var(--primary);
+  background:transparent;
+  color:white;
+}
 
-    .card:hover{
-      transform:scale(1.05);
-    }
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:12px;
+  padding:10px;
+}
 
-    .card img{
-      width:100%;
-      height:220px;
-      object-fit:cover;
-    }
+.card{
+  background:rgba(255,255,255,0.05);
+  border-radius:12px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:0.3s;
+}
 
-    .info{
-      padding:10px;
-    }
-  </style>
+.card:hover{
+  transform:scale(1.05);
+}
+
+.card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+.card h3{
+  font-size:14px;
+  padding:6px;
+}
+
+.card p{
+  font-size:12px;
+  opacity:0.7;
+  padding:0 6px 10px;
+}
+
+/* LOAD MORE */
+.load{
+  text-align:center;
+  margin:20px;
+}
+
+.load button{
+  padding:10px 20px;
+  border:none;
+  border-radius:10px;
+  background:var(--primary);
+  color:black;
+  cursor:pointer;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- NAV -->
-  <div class="navbar">
-    <div class="logo">📚 Comic Pur</div>
-    <div>
-      <a href="index.html" style="color:white;margin-right:10px;">Home</a>
-      <a href="comics.html" style="color:white;">Comics</a>
-    </div>
-  </div>
+<header>
+  <img src="assets/logo.png">
+  <img src="assets/search.png" onclick="location.href='search.html'">
+</header>
 
-  <!-- HERO -->
-  <div class="hero">
-    <h1>Welcome to Comic Pur</h1>
-    <p>Read Comics Online</p>
-    <button class="btn" onclick="location.href='comics.html'">
-      Start Reading
-    </button>
-  </div>
+<div class="hero">
+  <h1>Comic PUR</h1>
+  <p>Read Unlimited Comics Online</p>
+</div>
 
-  <!-- TRENDING -->
-  <div class="section">
-    <h2>🔥 Trending Comics</h2>
-    <div class="grid" id="trendingGrid"></div>
-  </div>
+<input class="search-bar" id="search" placeholder="Search comics..." onkeyup="searchComic()">
 
-  <!-- FEATURED -->
-  <div class="section">
-    <h2>⭐ Featured Comics</h2>
-    <div class="grid" id="featuredGrid"></div>
-  </div>
+<div class="grid" id="grid"></div>
 
-  <!-- JS CONNECT -->
-  <script src="js/main.js"></script>
+<div class="load">
+  <button onclick="loadMore()">Load More</button>
+</div>
+
+<script>
+
+let comics=[];
+let visible=20;
+
+fetch("data/comics.json")
+.then(r=>r.json())
+.then(data=>{
+  comics=data;
+  render();
+});
+
+function render(){
+  let grid=document.getElementById("grid");
+  grid.innerHTML="";
+
+  comics.slice(0,visible).forEach(c=>{
+    grid.innerHTML+=`
+      <div class="card" onclick="openComic('${c.slug}')">
+        <img src="${c.cover}">
+        <h3>${c.title}</h3>
+        <p>${c.genre || "Comic"}</p>
+      </div>
+    `;
+  });
+}
+
+function loadMore(){
+  visible+=20;
+  render();
+}
+
+function openComic(slug){
+  location.href=`comic.html?comic=${slug}`;
+}
+
+function searchComic(){
+  let val=document.getElementById("search").value.toLowerCase();
+  let grid=document.getElementById("grid");
+
+  grid.innerHTML="";
+
+  comics
+  .filter(c=>c.title.toLowerCase().includes(val))
+  .forEach(c=>{
+    grid.innerHTML+=`
+      <div class="card" onclick="openComic('${c.slug}')">
+        <img src="${c.cover}">
+        <h3>${c.title}</h3>
+        <p>${c.genre || ""}</p>
+      </div>
+    `;
+  });
+}
+
+</script>
 
 </body>
 </html>
