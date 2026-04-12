@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comic Reader - Comic Pur</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family:Arial;
+      background:#0f0f0f;
+      color:white;
+    }
+
+    /* TOP BAR */
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:15px;
+      background:#111;
+      position:sticky;
+      top:0;
+      z-index:10;
+    }
+
+    .topbar h2{
+      color:#00ff66;
+      font-size:18px;
+    }
+
+    .btn{
+      padding:8px 12px;
+      background:#00ff66;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+      color:black;
+      font-weight:bold;
+    }
+
+    /* SUMMARY */
+    .summary{
+      padding:15px;
+      background:#1a1a1a;
+      margin:10px;
+      border-radius:10px;
+    }
+
+    /* CHAPTER SET BUTTONS */
+    .sets{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      padding:10px;
+    }
+
+    .sets button{
+      padding:8px 10px;
+      background:#222;
+      color:white;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+    }
+
+    .sets button:hover{
+      background:#00ff66;
+      color:black;
+    }
+
+    /* CHAPTER GRID */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:10px;
+      padding:10px;
+    }
+
+    .chapter{
+      padding:12px;
+      text-align:center;
+      background:#1a1a1a;
+      border-radius:10px;
+      cursor:pointer;
+    }
+
+    .chapter:hover{
+      background:#00ff66;
+      color:black;
+    }
+
+    /* READER VIEW */
+    .reader{
+      display:none;
+      padding:10px;
+    }
+
+    .reader img{
+      width:100%;
+      margin-bottom:10px;
+      border-radius:8px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <h2>📖 Comic Pur Reader</h2>
+    <button class="btn" onclick="goBack()">Back</button>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    <h3 id="title">Comic Title</h3>
+    <p id="desc">Action | 300 Chapters</p>
+    <p>A short comic summary will appear here...</p>
+  </div>
+
+  <!-- CHAPTER SETS -->
+  <div class="sets" id="sets"></div>
+
+  <!-- CHAPTER GRID -->
+  <div class="grid" id="chapterGrid"></div>
+
+  <!-- READER VIEW -->
+  <div class="reader" id="reader"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const comic = params.get("comic");
+
+    const totalChapters = 300; // future-proof
+
+    // INIT SETS (20-20 system)
+    function createSets(){
+      const sets = document.getElementById("sets");
+
+      for(let i=1; i<=totalChapters; i+=20){
+        let end = i+19;
+        if(end > totalChapters) end = totalChapters;
+
+        sets.innerHTML += `
+          <button onclick="loadSet(${i},${end})">
+            ${i} - ${end}
+          </button>
+        `;
+      }
+    }
+
+    // LOAD CHAPTER SET
+    function loadSet(start,end){
+      const grid = document.getElementById("chapterGrid");
+      grid.style.display = "grid";
+
+      document.getElementById("reader").style.display = "none";
+      grid.innerHTML = "";
+
+      for(let i=start;i<=end;i++){
+        grid.innerHTML += `
+          <div class="chapter" onclick="openChapter(${i})">
+            CH ${i}
+          </div>
+        `;
+      }
+    }
+
+    // OPEN CHAPTER
+    function openChapter(num){
+      const grid = document.getElementById("chapterGrid");
+      const reader = document.getElementById("reader");
+
+      grid.style.display = "none";
+      reader.style.display = "block";
+
+      reader.innerHTML = "";
+
+      // load images (1.jpg,2.jpg...)
+      let page = 1;
+
+      function loadImage(){
+        const img = document.createElement("img");
+        img.src = `assets/comics/${comic}/ch-${num}/${page}.jpg`;
+
+        img.onerror = () => {
+          // stop when no more images
+          return;
+        };
+
+        reader.appendChild(img);
+        page++;
+      }
+
+      // simple loader (up to 50 pages safe limit)
+      for(let i=1;i<=50;i++){
+        loadImage();
+      }
+    }
+
+    function goBack(){
+      window.location.href = "comics.html";
+    }
+
+    // INIT
+    createSets();
+    loadSet(1,20);
+
+    document.getElementById("title").innerText = comic;
+    document.getElementById("desc").innerText = "Action | 300 Chapters";
+
+  </script>
+
+</body>
+</html>
