@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Comic PUR</title>
+
+<style>
+:root{
+  --primary:#00d4ff;
+  --accent:#ff69b4;
+  --dark:#0a001f;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  background:linear-gradient(135deg,var(--dark),#1a003f);
+  color:white;
+  font-family:'Segoe UI',sans-serif;
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 16px;
+  background:rgba(10,0,31,0.9);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+header img{
+  height:45px;
+}
+
+/* COVER */
+.cover{
+  width:100%;
+  max-width:350px;
+  margin:30px auto;
+  display:block;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,212,255,0.3);
+}
+
+/* SUMMARY */
+.summary{
+  margin:20px;
+  padding:20px;
+  background:rgba(255,255,255,0.05);
+  border-radius:15px;
+  line-height:1.6;
+  border:1px solid rgba(0,212,255,0.2);
+}
+
+/* SEARCH */
+.search-bar{
+  width:90%;
+  margin:20px auto;
+  display:block;
+  padding:12px;
+  border-radius:25px;
+  border:2px solid var(--primary);
+  background:transparent;
+  color:white;
+}
+
+/* PAGINATION */
+.pagination{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  margin:10px;
+}
+
+.pagination button{
+  padding:8px 12px;
+  border:none;
+  border-radius:8px;
+  background:#111;
+  color:white;
+  cursor:pointer;
+}
+
+.pagination button.active{
+  background:var(--primary);
+  color:black;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:10px;
+  padding:10px;
+}
+
+.episode{
+  padding:12px;
+  text-align:center;
+  background:rgba(255,255,255,0.08);
+  border-radius:12px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.episode:hover{
+  background:var(--primary);
+  color:black;
+  transform:scale(1.05);
+}
+
+/* BACK */
+.back{
+  text-align:center;
+  margin:40px;
+}
+
+.back a{
+  color:#aaa;
+  text-decoration:none;
+}
+
+.back a:hover{
+  color:var(--primary);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="assets/logo.png">
+  <img src="assets/search.png" onclick="location.href='search.html'">
+</header>
+
+<img id="cover" class="cover">
+<div class="summary" id="summary"></div>
+
+<input class="search-bar" id="search" placeholder="Episode search..." onkeyup="searchEpisode()">
+
+<div class="pagination" id="pagination"></div>
+
+<div class="grid" id="grid"></div>
+
+<div class="back">
+  <a href="index.html">← Back to Home</a>
+</div>
+
+<script>
+// GET COMIC NAME FROM URL
+const params = new URLSearchParams(location.search);
+const comic = params.get("comic");
+
+// CONFIG DATA (FROM JSON OR INLINE)
+let data = {};
+
+fetch("data/comics.json")
+.then(r=>r.json())
+.then(list=>{
+  data = list.find(c=>c.slug===comic);
+
+  document.title = data.title + " - Comic PUR";
+  document.getElementById("cover").src = data.cover;
+  document.getElementById("summary").innerText = data.summary;
+
+  initEpisodes();
+});
+
+let currentPage = 1;
+const perPage = 20;
+
+function initEpisodes(){
+  render();
+  pagination();
+}
+
+function render(){
+  const grid = document.getElementById("grid");
+  grid.innerHTML="";
+
+  let start=(currentPage-1)*perPage+1;
+  let end=Math.min(start+perPage-1,data.episodes);
+
+  for(let i=start;i<=end;i++){
+    grid.innerHTML+=`
+      <div class="episode" onclick="openEp(${i})">
+        EP ${i}
+      </div>
+    `;
+  }
+}
+
+function pagination(){
+  const p=document.getElementById("pagination");
+  p.innerHTML="";
+
+  let pages=Math.ceil(data.episodes/perPage);
+
+  for(let i=1;i<=pages;i++){
+    p.innerHTML+=`
+      <button onclick="change(${i})">${i}</button>
+    `;
+  }
+}
+
+function change(i){
+  currentPage=i;
+  render();
+}
+
+function openEp(n){
+  location.href=`reader/${comic}/ch${n}.html`;
+}
+
+function searchEpisode(){
+  const val=document.getElementById("search").value;
+  const grid=document.getElementById("grid");
+
+  if(!val){
+    render();
+    return;
+  }
+
+  let n=parseInt(val);
+
+  if(n>=1 && n<=data.episodes){
+    grid.innerHTML=`<div class="episode" onclick="openEp(${n})">EP ${n}</div>`;
+  }
+}
+</script>
+
+</body>
+</html>
