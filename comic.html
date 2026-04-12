@@ -159,7 +159,7 @@ const comic = params.get("comic");
 // CONFIG DATA (FROM JSON OR INLINE)
 let data = {};
 
-fetch("data/comics.json")
+fetch("comics.json")
 .then(r=>r.json())
 .then(list=>{
   data = list.find(c=>c.slug===comic);
