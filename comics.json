@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Anguthi Ka Bhoot",
+    "slug": "anguthi-ka-bhoot",
+    "genre": "Horror",
+    "rating": "Mature",
+    "episodes": 10,
+    "cover": "https://i.ibb.co/HDRJgPXj/file-00000000edf07209be446a70ab82ac9c.png",
+    "summary": "Ek purani anguthi Neha ko ek ajeeb sapno ki duniya me le jaati hai jahan reality aur khwab mix ho jaate hain."
+  },
+  {
+    "title": "Bepanah Ishq",
+    "slug": "bepanah-ishq",
+    "genre": "Romance / Action",
+    "rating": "Mature",
+    "episodes": 120,
+    "cover": "https://i.ibb.co/Q7HN7z02/file-00000000068071fa864f9ef6edef8793.png",
+    "summary": "Asmita ek aisi ladki hai jise uske hi parivaar ne bech diya. Uski life tab badalti hai jab wo Shivraj se milti hai, jo ek dangerous gangster hai."
+  }
+]
