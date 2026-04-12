@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comic PUR</title>
+
+<style>
+
+body{
+background:#0f001f;
+color:#e0e0ff;
+font-family:'Segoe UI',system-ui;
+margin:0;
+}
+
+/* HEADER */
+
+header{
+padding:8px 14px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#0a001f;
+}
+
+header img{
+height:40px;
+}
+
+/* MAIN */
+
+.container{
+padding:16px;
+max-width:900px;
+margin:auto;
+}
+
+/* COVER */
+
+.cover{
+width:100%;
+max-width:300px;
+border-radius:14px;
+display:block;
+margin:auto;
+}
+
+/* TITLE */
+
+.title{
+font-size:26px;
+font-weight:900;
+text-align:center;
+margin:12px 0;
+}
+
+/* SUMMARY */
+
+.summary{
+background:#1a003f;
+padding:14px;
+border-radius:12px;
+margin-bottom:20px;
+}
+
+/* EPISODES */
+
+.episodes{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.ep-btn{
+background:#00d4ff;
+color:black;
+padding:10px;
+border-radius:8px;
+text-align:center;
+text-decoration:none;
+font-weight:bold;
+}
+
+/* RECOMMEND */
+
+.recommend{
+margin-top:30px;
+}
+
+.rec-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+}
+
+.rec-card img{
+width:100%;
+border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<img src="assets/heading.png">
+<img src="assets/logo-circle.png">
+<img src="assets/search-icon.png" onclick="location.href='search.html'">
+</header>
+
+<div class="container">
+
+<img id="cover" class="cover">
+
+<div id="title" class="title"></div>
+
+<div id="summary" class="summary"></div>
+
+<div id="episodes" class="episodes"></div>
+
+<div class="recommend">
+<h3>Recommended</h3>
+<div id="recommend" class="rec-grid"></div>
+</div>
+
+</div>
+
+<script>
+
+/* GET SLUG FROM URL */
+const params = new URLSearchParams(window.location.search);
+const slug = params.get("comic");
+
+/* LOAD BOTH JSON */
+
+Promise.all([
+fetch("data/comics.json").then(r=>r.json()),
+fetch("data/episodes.json").then(r=>r.json())
+])
+.then(([comicData, episodeData])=>{
+
+const comic = comicData.comics.find(c=>c.slug===slug);
+const episode = episodeData.episodes.find(e=>e.slug===slug);
+
+/* SET DATA */
+
+document.getElementById("cover").src = comic.cover;
+document.getElementById("title").innerText = comic.title;
+document.getElementById("summary").innerText = comic.summary;
+
+/* EPISODES */
+
+let epHTML = "";
+
+for(let i=1;i<=episode.total;i++){
+epHTML += `<a class="ep-btn" href="${episode.reader}ch${i}.html">EP ${i}</a>`;
+}
+
+document.getElementById("episodes").innerHTML = epHTML;
+
+/* RECOMMEND */
+
+let recHTML = "";
+
+let shuffled = comicData.comics.sort(()=>0.5-Math.random()).slice(0,6);
+
+shuffled.forEach(c=>{
+if(c.slug !== slug){
+recHTML += `
+<a class="rec-card" href="comic.html?comic=${c.slug}">
+<img src="${c.cover}">
+</a>
+`;
+}
+});
+
+document.getElementById("recommend").innerHTML = recHTML;
+
+});
+
+</script>
+
+</body>
+</html>
