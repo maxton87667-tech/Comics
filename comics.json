@@ -22,11 +22,11 @@
     },
     {
       "id": 3,
-      "title": "",
-      "cover": "",
-      "episodes": 0,
-      "genre": "",
-      "link": "pages/.html",
+      "title": "Pyaar Ka Intezar",
+      "cover": "https://i.ibb.co/FkjT6brt/file-000000008f98720bb90daea18f2149bd.png",
+      "episodes": 35,
+      "genre": "Drama, Romance",
+      "link": "pages/pyaar-ka-intezar.html",
       "date": "2026-04-01",
       "show": true
     },
@@ -142,11 +142,11 @@
     },
     {
       "id": 15,
-      "title": "",
-      "cover": "",
-      "episodes": 0,
-      "genre": "",
-      "link": "pages/.html",
+      "title": "Tute Dilon Ki Mohabbat",
+      "cover": "https://i.ibb.co/5x8pjp9w/file-000000001f94720789c7a2a43382e1e7.png",
+      "episodes": 8,
+      "genre": "Romance, Drama",
+      "link": "pages/tute-dilon-ki-mahobbat.html",
       "date": "2026-04-01",
       "show": true
     }
