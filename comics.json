@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Ishq Par Jor Nahi",
       "cover": "https://i.ibb.co/RpV5MWv2/file-0000000071087207b8fdc85d969f22b3.png",
-      "episodes": 360,
+      "episodes": 350,
       "genre": "Romance, Drama",
       "link": "pages/ishq-par-jor-nahi.html",
       "date": "2026-06-19",
@@ -160,14 +160,15 @@
       "date": "2026-06-03",
       "show": true
     },
-    "id": 17,
+    {
+      "id": 17,
       "title": "Mafia Love Story",
       "cover": "https://i.ibb.co/m5tdK771/file-0000000005cc7206980966371a052a15.png",
       "episodes": 50,
       "genre": "Romance, Drama",
       "link": "pages/mafia-love-story.html",
-      "date": "2026-06-022",
+      "date": "2026-06-22",
       "show": true
-    },
+    }
   ]
 }
