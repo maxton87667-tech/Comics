@@ -159,6 +159,15 @@
       "link": "pages/mafia-ki-duhlan.html",
       "date": "2026-06-03",
       "show": true
-    }
+    },
+    "id": 17,
+      "title": "Mafia Love Story",
+      "cover": "https://i.ibb.co/m5tdK771/file-0000000005cc7206980966371a052a15.png",
+      "episodes": 50,
+      "genre": "Romance, Drama",
+      "link": "pages/mafia-love-story.html",
+      "date": "2026-06-022",
+      "show": true
+    },
   ]
 }
