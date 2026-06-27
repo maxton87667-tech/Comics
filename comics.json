@@ -169,6 +169,26 @@
       "link": "pages/mafia-love-story.html",
       "date": "2026-06-22",
       "show": true
+    },
+    {
+      "id": 18,
+      "title": "Jija Ji Se Shaadi",
+      "cover": "https://i.ibb.co/4wv93Tc2/file-0000000057d472068a5d5b3732f682b6.png",
+      "episodes": 10,
+      "genre": "Romance, Drama",
+      "link": "pages/jija-ji-se-shaadi.html",
+      "date": "2026-06-27",
+      "show": true
+    },
+    {
+      "id": 19,
+      "title": "Ben 10 Dynamite",
+      "cover": "https://i.ibb.co/60qXy0vM/Ben-10-001-2026-000.jpg",
+      "episodes": 1,
+      "genre": "Action, Adventure",
+      "link": "pages/ben-10-dynamite.html",
+      "date": "2026-06-27",
+      "show": true
     }
   ]
 }
