@@ -85,7 +85,7 @@
       overflow: hidden;
       cursor: pointer;
       transition: transform 0.3s;
-      background: #000;
+      background: #000; 
     }
 
     .card:hover {
@@ -124,7 +124,7 @@
 
     /* BUTTON */
     .load-btn {
-      display: none;
+      display: none; 
       margin: 30px auto;
       padding: 12px 24px;
       border: none;
@@ -157,13 +157,13 @@
 
   <header>
     <div class="logo">
-      <img src="assets/heading.png" alt="Logo">
+      <img src="https://maxton87667-tech.github.io/Comics/assets/heading.png" alt="Logo">
     </div>
 
-    <img src="assets/logo-circle.png" class="heading-img" alt="Comic Pur">
+    <img src="https://maxton87667-tech.github.io/Comics/assets/logo-circle.png" class="heading-img" alt="Comic Pur">
 
-    <img src="assets/search-icon.png" class="search-icon" alt="Search"
-         onclick="window.location.href='search.html'">
+    <img src="https://maxton87667-tech.github.io/Comics/assets/search-icon.png" class="search-icon" alt="Search"
+         onclick="window.location.href='https://maxton87667-tech.github.io/Comics/search.html'">
   </header>
 
   <div class="container">
@@ -179,8 +179,8 @@
     const loadMoreBtn = document.getElementById("loadMore");
     const errorMsg = document.getElementById("errorMessage");
 
-    // Fetch and parse the JSON data
-    fetch("comics.json")
+    // Fetching from full absolute URL
+    fetch("https://maxton87667-tech.github.io/Comics/comics.json")
       .then(res => {
         if (!res.ok) throw new Error("Network response was not ok");
         return res.json();
@@ -195,7 +195,7 @@
       })
       .catch(error => {
         console.error("Error loading JSON:", error);
-        errorMsg.style.display = "block";
+        errorMsg.style.display = "block"; 
       });
 
     // Render the comic cards to the grid
