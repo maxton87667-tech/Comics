@@ -85,7 +85,7 @@
       overflow: hidden;
       cursor: pointer;
       transition: transform 0.3s;
-      background: #000; /* Fallback for loading images */
+      background: #000;
     }
 
     .card:hover {
@@ -124,7 +124,7 @@
 
     /* BUTTON */
     .load-btn {
-      display: none; /* Hidden by default until JS decides */
+      display: none;
       margin: 30px auto;
       padding: 12px 24px;
       border: none;
@@ -195,12 +195,12 @@
       })
       .catch(error => {
         console.error("Error loading JSON:", error);
-        errorMsg.style.display = "block"; // Show error message to user
+        errorMsg.style.display = "block";
       });
 
     // Render the comic cards to the grid
     function render() {
-      list.innerHTML = ""; // Clear existing
+      list.innerHTML = ""; 
 
       comics.slice(0, visible).forEach(c => {
         list.innerHTML += `
