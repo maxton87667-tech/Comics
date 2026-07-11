@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Comic Pur</title>
+  <title>Comic Pur - We Have Moved!</title>
+
+  <meta http-equiv="refresh" content="5;url=https://comic-pur.maxton87667.workers.dev/" />
 
   <style>
     :root {
@@ -24,6 +26,8 @@
       color: white;
       font-family: 'Segoe UI', system-ui, sans-serif;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     /* HEADER */
@@ -54,101 +58,83 @@
       max-width: 220px;
     }
 
-    .search-icon {
-      width: 60px;
-      cursor: pointer;
-      filter: drop-shadow(0 0 15px var(--glow));
-      transition: transform 0.2s;
-    }
-
-    .search-icon:hover {
-      transform: scale(1.1);
-    }
-
-    /* GRID */
+    /* REDIRECT CONTAINER */
     .container {
-      padding: 15px;
-      max-width: 1200px;
-      margin: 0 auto;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 14px;
-    }
-
-    /* CARD */
-    .card {
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.3s;
-      background: #000; 
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    }
-
-    .card img {
+    .redirect-card {
+      background: rgba(10, 0, 31, 0.85);
+      border: 2px solid var(--primary);
+      border-radius: 20px;
+      padding: 40px 30px;
+      max-width: 500px;
       width: 100%;
-      height: 240px;
-      object-fit: cover;
-      display: block;
+      text-align: center;
+      box-shadow: 0 0 35px var(--glow);
+      backdrop-filter: blur(10px);
+      animation: float 3s ease-in-out infinite;
     }
 
-    /* OVERLAY */
-    .overlay {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      padding: 15px 10px 10px;
-      background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.6), transparent);
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
     }
 
-    .title {
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 4px;
-      line-height: 1.2;
+    .icon {
+      font-size: 64px;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 0 15px var(--accent));
     }
 
-    .meta {
-      font-size: 11px;
-      color: #ccc;
-      margin-top: 2px;
+    h1 {
+      font-size: 26px;
+      color: var(--primary);
+      margin-bottom: 12px;
+      text-shadow: 0 0 10px var(--glow);
     }
 
-    /* BUTTON */
-    .load-btn {
-      display: none; 
-      margin: 30px auto;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 10px;
+    p {
+      color: #dddddd;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    /* NEW SITE BUTTON */
+    .redirect-btn {
+      display: inline-block;
+      width: 80%;
+      padding: 14px 28px;
+      border-radius: 12px;
       background: linear-gradient(45deg, var(--primary), var(--accent));
       color: white;
       font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 15px var(--glow);
+      font-size: 18px;
+      text-decoration: none;
+      box-shadow: 0 0 20px var(--glow);
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .load-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 20px var(--glow);
+    .redirect-btn:hover {
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 0 30px var(--accent);
     }
 
-    /* ERROR MESSAGE */
-    .error-msg {
-      text-align: center;
-      color: #ff6b6b;
-      margin-top: 50px;
+    .timer {
+      margin-top: 25px;
+      font-size: 13px;
+      color: #aaaaaa;
+    }
+
+    .timer span {
+      color: var(--primary);
       font-weight: bold;
-      display: none;
+      font-size: 15px;
     }
   </style>
 </head>
@@ -162,77 +148,37 @@
 
     <img src="https://maxton87667-tech.github.io/Comics/assets/logo-circle.png" class="heading-img" alt="Comic Pur">
 
-    <img src="https://maxton87667-tech.github.io/Comics/assets/search-icon.png" class="search-icon" alt="Search"
-         onclick="window.location.href='https://maxton87667-tech.github.io/Comics/search.html'">
+    <div style="width: 52px;"></div>
   </header>
 
   <div class="container">
-    <div id="errorMessage" class="error-msg">Failed to load comics. Please try again later.</div>
-    <div class="grid" id="comicList"></div>
-    <button id="loadMore" class="load-btn">Load More</button>
+    <div class="redirect-card">
+      <div class="icon">🚀</div>
+      <h1>We Have Transferred!</h1>
+      <p>Comic Pur has moved to a brand new website with a much better reading experience and faster loading. Welcome to our new home!</p>
+      
+      <a href="https://comic-pur.maxton87667.workers.dev/" class="redirect-btn">Go to New Website</a>
+      
+      <div class="timer">Redirecting automatically in <span id="countdown">5</span> seconds...</div>
+    </div>
   </div>
 
   <script>
-    let comics = [];
-    let visible = 8;
-    const list = document.getElementById("comicList");
-    const loadMoreBtn = document.getElementById("loadMore");
-    const errorMsg = document.getElementById("errorMessage");
+    // Automatic Countdown & Redirect Script
+    let seconds = 5;
+    const countdownEl = document.getElementById('countdown');
+    const newSiteURL = "https://comic-pur.maxton87667.workers.dev/";
 
-    // Fetching from full absolute URL
-    fetch("https://maxton87667-tech.github.io/Comics/comics.json")
-      .then(res => {
-        if (!res.ok) throw new Error("Network response was not ok");
-        return res.json();
-      })
-      .then(data => {
-        // Filter, sort by date (newest first)
-        comics = data.comics
-          .filter(c => c.show)
-          .sort((a, b) => new Date(b.date) - new Date(a.date));
-        
-        render();
-      })
-      .catch(error => {
-        console.error("Error loading JSON:", error);
-        errorMsg.style.display = "block"; 
-      });
-
-    // Render the comic cards to the grid
-    function render() {
-      list.innerHTML = ""; 
-
-      comics.slice(0, visible).forEach(c => {
-        list.innerHTML += `
-          <div class="card" onclick="openComic('${c.link}')">
-            <img src="${c.cover}" alt="${c.title}" loading="lazy">
-            <div class="overlay">
-              <div class="title">${c.title}</div>
-              <div class="meta">Episodes: ${c.episodes}</div>
-              <div class="meta">${c.genre}</div>
-            </div>
-          </div>
-        `;
-      });
-
-      // Show or hide the Load More button based on remaining items
-      if (visible < comics.length) {
-        loadMoreBtn.style.display = "block";
-      } else {
-        loadMoreBtn.style.display = "none";
+    const interval = setInterval(() => {
+      seconds--;
+      if (countdownEl) {
+        countdownEl.textContent = seconds;
       }
-    }
-
-    // Navigation function
-    function openComic(link) {
-      window.location.href = link;
-    }
-
-    // Load More event listener
-    loadMoreBtn.addEventListener("click", () => {
-      visible += 8;
-      render();
-    });
+      if (seconds <= 0) {
+        clearInterval(interval);
+        window.location.href = newSiteURL;
+      }
+    }, 1000);
   </script>
 
 </body>
