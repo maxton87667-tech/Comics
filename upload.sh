@@ -1,1 +1,1 @@
-git add . && git commit -m "Uploaded new comic chapters" && git push
+git add --ignore-removal . && git commit -m "Uploaded new chapters" && git push
