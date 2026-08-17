@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comic Panel Sequence Renamer</title>
+    <style>
+        :root {
+            --primary: #ff4757;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-main: #f1f2f6;
+            --text-muted: #a4b0be;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 2px solid var(--card-bg);
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-top: 0;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .code-block {
+            background: #000;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            color: #2ed573;
+            overflow-x: auto;
+        }
+
+        .step-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .step-list li {
+            background: rgba(255, 71, 87, 0.1);
+            margin: 10px 0;
+            padding: 15px;
+            border-left: 4px solid var(--primary);
+            border-radius: 0 5px 5px 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        a.btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        a.btn:hover {
+            background: #ff6b81;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Comic Panel Renamer</h1>
+            <p class="subtitle">A Python utility to seamlessly merge and sequence screen-recorded comic chapters.</p>
+        </header>
+
+        <div class="card">
+            <h2>About The Tool</h2>
+            <p>When recording long digital drawing and storyboarding sessions, screen recorders often hit their limit and split the video. Extracting images from these split videos results in overlapping frame numbers (e.g., both parts starting with <code>IMG0.jpg</code>). </p>
+            <p>This tool safely merges those split folders into one continuous sequence without overwriting your hard work.</p>
+        </div>
+
+        <div class="card">
+            <h2>Features</h2>
+            <ul>
+                <li><strong>Zero Data Loss:</strong> Creates copies instead of renaming original files.</li>
+                <li><strong>Smart Sorting:</strong> Maintains the correct order of extracted frames.</li>
+                <li><strong>Android/Termux Ready:</strong> Fully compatible with mobile environments.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>How to Use in Termux</h2>
+            <ul class="step-list">
+                <li><strong>Step 1:</strong> Create a main folder. Inside it, create <code>part1</code> and <code>part2</code> folders. Place your extracted images inside them respectively.</li>
+                <li><strong>Step 2:</strong> Place the <code>rename.py</code> script outside the part folders, but inside the main folder.</li>
+                <li><strong>Step 3:</strong> Open Termux and install Python if you haven't: <div class="code-block">pkg install python</div></li>
+                <li><strong>Step 4:</strong> Navigate to your folder and run the script: <div class="code-block">python rename.py</div></li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>Created for Comic Artists and Webtoon Creators.</p>
+        </div>
+    </div>
+
+</body>
+</html>
